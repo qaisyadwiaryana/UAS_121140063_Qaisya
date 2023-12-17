@@ -1,277 +1,153 @@
-1.1 - Client-side Programming (HTML + JavaScript)
+Nama : Qaisya Dwi Aryana
+NIM : 121140063
+UAS PEMROGRAMAN WEB RA
 
-html
-Download
-Copy code
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Formulir Mahasiswa</title>
-</head>
-<body>
-    <h2>Formulir Pendaftaran Kelulusan</h2>
-    <form id="formMahasiswa">
-        <label for="nama">Nama:</label><br>
-        <input type="text" id="nama" name="nama" required><br>
+**Pertanyaan-pertanyaan Bonus**
+1.	Apa langkah-langkah yang Anda lakukan untuk meng-host aplikasi web Anda?
+   1. Langkah pertama yang saya lakukan adalah mengunjungi situs web InfinityFree di www.infinityfree.com dan mendaftar untuk akun gratis.
+   2. Setelah saya selesai mendaftar, InfinityFree memberikan saya pilihan antara menggunakan domain gratis yang mereka sediakan atau memilih subdomain dari lebih dari 25 ekstensi yang tersedia. Saya juga bisa menggunakan domain saya sendiri jika sudah punya.
+   3. Dan saya memanfaatkan layanan gratis yang ditawarkan InfinityFree
+      
+2.	Pilih penyedia hosting web yang menurut Anda paling cocok untuk aplikasi web Anda. Berikan alasan Anda.
+Untuk saat ini Infinityfree adalah penyedia hosting yang gratis cocok untuk pemula yang menerapkan web sederhana. InfinityFree adalah pilihan gratis yang saya pilih saat
+pertama kali ingin belajar membuat website tanpa harus mengeluarkan biaya awal. Meskipun ada beberapa batasan, saya rasa ini adalah pilihan yang bagus untuk memulai. Ini memberi saya kesempatan untuk eksplorasi dan belajar tanpa tekanan biaya.
+  	
+3.	Bagaimana Anda memastikan keamanan aplikasi web yang Anda host?
+   Saya pastikan keamanan aplikasi web dengan memperbarui secara teratur, menggunakan SSL, melakukan pemantauan keamanan, backup berkala, dan mengontrol akses dengan ketat.
+  	
+4.	Jelaskan konfigurasi server yang Anda terapkan untuk mendukung aplikasi web Anda.
+   Sebagai pengguna InfinityFree, saya tidak memiliki akses langsung ke konfigurasi server. Platform ini menyediakan lingkungan hosting terkelola di mana konfigurasi server tidak dapat diubah oleh pengguna. InfinityFree telah mengatur konfigurasi server untuk mendukung berbagai aplikasi web dengan standar konfigurasi yang umum dan optimal untuk kebanyakan pengguna.
 
-        <label for="nim">NIM:</label><br>
-        <input type="text" id="nim" name="nim" required><br>
+   **Penjelasan Langkah Langkah**
+   
+**Bagian 1: Client-side Programming**
+1.1 Buatlah sebuah halaman web sederhana yang memanfaatkan JavaScript untuk melakukan manipulasi DOM. 
+1.2 Buatlah beberapa event untuk menghandle interaksi pada halaman web
 
-        <label for="jurusan">Jurusan:</label><br>
-        <input type="text" id="jurusan" name="jurusan" required><br>
+// Function to add data to the table
+function addDataToTable(data) {
+    var table = document.getElementById("tableMahasiswa");
+    var row = table.insertRow(-1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
+    var cell6 = row.insertCell(5);
+    var cell7 = row.insertCell(6);
 
-        <label for="kuliah">Kuliah Keahlian:</label><br>
-        <input type="radio" id="rplsi" name="kuliah" value="rplsi">
-        <label for="rplsi">RPLSI</label><br>
-        <input type="radio" id="aide" name="kuliah" value="aide">
-        <label for="aide">AIDE</label><br>
-        <input type="radio" id="kasper" name="kuliah" value="kasper">
-        <label for="kasper">Kasper</label><br>
+    cell1.innerHTML = data.nama;
+    cell2.innerHTML = data.nim;
+    cell3.innerHTML = data.jurusan;
+    cell4.innerHTML = data.kuliah;
+    cell5.innerHTML = data.tahunMasuk;
+    cell6.innerHTML = data.tahunLulus;
+    cell7.innerHTML = data.tanggal;
+}
 
-        <label for="tahunMasuk">Tahun Masuk:</label><br>
-        <input type="number" id="tahunMasuk" name="tahunMasuk" required><br>
+// Event handler for form submission
+document.getElementById("formMahasiswa").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var nama = document.getElementById("nama").value;
+    var nim = document.getElementById("nim").value;
+    var jurusan = document.getElementById("jurusan").value;
+    var kuliah = document.querySelector('input[name="kuliah"]:checked').value;
+    var tahunMasuk = document.getElementById("tahunMasuk").value;
+    var tahunLulus = document.getElementById("tahunLulus").value;
+    var tanggal = document.getElementById("tanggal").value;
 
-        <label for="tahunLulus">Tahun Lulus:</label><br>
-        <input type="number" id="tahunLulus" name="tahunLulus" required><br>
+    var data = {
+        nama: nama,
+        nim: nim,
+        jurusan: jurusan,
+        kuliah: kuliah,
+        tahunMasuk: tahunMasuk,
+        tahunLulus: tahunLulus,
+        tanggal: tanggal
+    };
 
-        <label for="tanggal">Tanggal Penginputan:</label><br>
-        <input type="date" id="tanggal" name="tanggal" required><br>
+    addDataToTable(data);
+    this.reset();
+});
 
-        <input type="submit" value="Submit">
-    </form>
+Kode JavaScript diatas memanipulasi DOM dengan cara menambahkan data ke dalam sebuah tabel HTML dan menangani pengiriman formulir.
+- Fungsi `addDataToTable` digunakan untuk menambahkan baris baru ke dalam tabel dengan data yang diberikan.
+- Handler acara (event handler) digunakan untuk mengumpulkan data formulir dan menambahkannya ke dalam tabel menggunakan fungsi `addDataToTable` ketika formulir dikirim.
+Fungsi `insertRow()` digunakan untuk membuat elemen `<tr>` kosong dan menambahkannya ke dalam tabel. Kemudian, metode `insertCell()` digunakan untuk menambahkan sel ke dalam baris yang telah dibuat. Setelah itu, data dimasukkan ke dalam sel-sel tersebut menggunakan properti `innerHTML`.
 
-    <table id="tableMahasiswa" border="1">
-        <tr>
-            <th>Nama</th>
-            <th>NIM</th>
-            <th>Jurusan</th>
-            <th>Kuliah Keahlian</th>
-            <th>Tahun Masuk</th>
-            <th>Tahun Lulus</th>
-            <th>Tanggal Penginputan</th>
-        </tr>
-    </table>
+**Bagian 2: Server-side Programming**
+2.1 Implementasikan script PHP untuk mengelola data dari formulir pada Bagian 1 menggunakan variabel global seperti `$_POST` atau `$_GET`.
+Tampilkan hasil pengolahan data ke layar.
+<?php
+// Menangkap data dari form
+$nama = $_POST['nama'];
+$nim = $_POST['nim'];
+$jurusan = $_POST['jurusan'];
+$kuliah = $_POST['kuliah'];
+$tahunMasuk = $_POST['tahunMasuk'];
+$tahunLulus = $_POST['tahunLulus'];
 
-    <script>
-        // Function to add data to the table
-        function addDataToTable(data) {
-            var table = document.getElementById("tableMahasiswa");
-            var row = table.insertRow(-1);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
-            var cell6 = row.insertCell(5);
-            var cell7 = row.insertCell(6);
+// Memanggil fungsi tambah_mahasiswa yang sudah didefinisikan di file lain
+require_once 'config.php';
+tambah_mahasiswa($nama, $nim, $jurusan, $kuliah, $tahunMasuk, $tahunLulus);
+?>
 
-            cell1.innerHTML = data.nama;
-            cell2.innerHTML = data.nim;
-            cell3.innerHTML = data.jurusan;
-            cell4.innerHTML = data.kuliah;
-            cell5.innerHTML = data.tahunMasuk;
-            cell6.innerHTML = data.tahunLulus;
-            cell7.innerHTML = data.tanggal;
-        }
+Kode di atas akan mengirimkan data dari form ke file config.php yang berisi fungsi tambah_mahasiswa . Fungsi tersebut akan memasukkan data ke database MySQL dengan query INSERT. Untuk menampilkan hasil pengolahan data ke layar, dapat menggunakan perintah echo seperti yang sudah dilakukan di dalam fungsi tambah_mahasiswa.
 
-        // Event handler for form submission
-        document.getElementById("formMahasiswa").addEventListener("submit", function(event) {
-            event.preventDefault();
-            var nama = document.getElementById("nama").value;
-            var nim = document.getElementById("nim").value;
-            var jurusan = document.getElementById("jurusan").value;
-            var kuliah = document.querySelector('input[name="kuliah"]:checked').value;
-            var tahunMasuk = document.getElementById("tahunMasuk").value;
-            var tahunLulus = document.getElementById("tahunLulus").value;
-            var tanggal = document.getElementById("tanggal").value;
-
-            var data = {
-                nama: nama,
-                nim: nim,
-                jurusan: jurusan,
-                kuliah: kuliah,
-                tahunMasuk: tahunMasuk,
-                tahunLulus: tahunLulus,
-                tanggal: tanggal
-            };
-
-            addDataToTable(data);
-            this.reset();
-        });
-    </script>
-</body>
-</html>></s>
-
-Bagian 3: Database Management (Bobot: 20%) 3.1 (5%) Buatlah sebuah tabel pada database MySQL Panduan:
-Lampirkan langkah-langkah dalam membuat basisdata dengan syntax basisdata
-3.2 (5%) Buatlah konfigurasi koneksi ke database MySQL pada file PHP. Pastikan koneksi berhasil dan dapat diakses. Panduan:
-
-Gunakan konstanta atau variabel untuk menyimpan informasi koneksi (host, username, password, nama database).
-3.3 (10%) Lakukan manipulasi data pada tabel database dengan menggunakan query SQL. Misalnya, tambah data, ambil data, atau update data. Panduan:
-
-Gunakan query SQL yang sesuai dengan skenario yang diberikan.
-Bagian 4: State Management (Bobot: 20%) 4.1 (10%) Buatlah skrip PHP yang menggunakan session untuk menyimpan dan mengelola state pengguna. Implementasikan logika yang memanfaatkan session. Panduan:
-
-Gunakan session_start() untuk memulai session.
-Simpan informasi pengguna ke dalam session.
-4.2 (10%) Implementasikan pengelolaan state menggunakan cookie dan browser storage pada sisi client menggunakan JavaScript. Panduan:
-
-Buat fungsi-fungsi untuk menetapkan, mendapatkan, dan menghapus cookie.
-
-Gunakan browser storage untuk menyimpan informasi secara lokal.
-
-Pertimbangkan untuk memberikan komentar pada kode Anda untuk menjelaskan langkah-langkah atau alasan tertentu.
+2.2 Buatlah sebuah objek PHP berbasis OOP yang memiliki minimal dua metode dan gunakan objek tersebut dalam skenario tertentu pada halaman web Anda.
 
 
-Koneksi Database dan Penambahan Tabel:
-php
-Download
-Copy code
-// Konfigurasi koneksi ke database MySQL
-define('DB_HOST', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'kasih_tahu');
+**Bagian 3: Database Management**
+3.1 Buatlah sebuah tabel pada database MySQL
+-- Membuat database bernama pendaftaran_siswa
+CREATE DATABASE pendaftaran_siswa;
 
-// Koneksi ke database MySQL
-$conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
+-- Menggunakan database yang sudah dibuat
+USE pendaftaran_siswa;
 
+-- Membuat tabel bernama mahasiswa
+CREATE TABLE mahasiswa (
+    id INT NOT NULL AUTO_INCREMENT,
+    nama VARCHAR(64) NOT NULL,
+    nim VARCHAR(16) NOT NULL,
+    jurusan VARCHAR(32) NOT NULL,
+    kuliah VARCHAR(64) NOT NULL,
+    tahunMasuk INT NOT NULL,
+    tahunLulus INT NOT NULL,
+    tanggal DATE NOT NULL DEFAULT CURRENT_DATE,
+    PRIMARY KEY (id)
+);
+
+Kode di atas akan membuat sebuah database bernama pendaftaran_siswa dan sebuah tabel bernama mahasiswa di dalamnya. Tabel tersebut memiliki kolom-kolom seperti id, nama, nim, jurusan, kuliah, tahun masuk, tahun lulus, dan tanggal. Kolom id adalah kunci utama (primary key) yang akan diisi secara otomatis (auto increment). Kolom tanggal adalah tanggal saat data dimasukkan dan akan diisi secara otomatis dengan nilai default tanggal sekarang (current date).
+
+3.2 Buatlah konfigurasi koneksi ke database MySQL pada file PHP. Pastikan koneksi berhasil dan dapat diakses.
+<?php
+// Menyimpan informasi koneksi ke variabel
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "pendaftaran_siswa";
+
+// Membuat koneksi ke database MySQL
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Memeriksa koneksi
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Membuat tabel 'mahasiswa' pada database 'kasih_tahu'
-$sql = "CREATE TABLE mahasiswa (
-    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nama VARCHAR(255) NOT NULL,
-    nim VARCHAR(255) NOT NULL,
-    jurusan VARCHAR(255) NOT NULL,
-    kuliah VARCHAR(255) NOT NULL,
-    tahunMasuk INT(11) NOT NULL,
-    tahunLulus INT(11) NOT NULL,
-    tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)";
+// Jika koneksi berhasil, tampilkan pesan
+echo "Koneksi berhasil";
+?>
 
-if ($conn->query($sql) === TRUE) {
-    echo "Tabel mahasiswa berhasil dibuat";
-} else {
-    echo "Gagal membuat tabel: " . $conn->error;
-}
+Kode di atas akan membuat sebuah objek koneksi bernama $conn dengan menggunakan kelas mysqli yang disediakan oleh PHP. Objek tersebut akan menghubungkan file PHP dengan database MySQL yang sudah dibuat sebelumnya. Untuk memeriksa koneksi, dapat menggunakan properti connect_error yang akan mengembalikan nilai NULL jika koneksi berhasil, atau pesan error jika koneksi gagal. Jika koneksi gagal, Anda dapat menggunakan perintah die untuk menghentikan eksekusi skrip dan menampilkan pesan error. Jika koneksi berhasil, dapat menggunakan perintah echo untuk menampilkan pesan.
 
-$conn->close();
-Manipulasi Data pada Tabel:
-php
-Download
-Copy code
-// Fungsi untuk menambah data mahasiswa
-function tambah_mahasiswa($nama, $nim, $jurusan, $kuliah, $tahunMasuk, $tahunLulus) {
-    global $conn;
+3.3 Lakukan manipulasi data pada tabel database dengan menggunakan query SQL. Misalnya, tambah data, ambil data, atau update data.
 
-    $sql = "INSERT INTO mahasiswa (nama, nim, jurusan, kuliah, tahunMasuk, tahunLulus)
-    VALUES ('$nama', '$nim', '$jurusan', '$kuliah', '$tahunMasuk', '$tahunLulus')";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Data mahasiswa berhasil ditambahkan";
-    } else {
-        echo "Gagal menambahkan data: " . $conn->error;
-    }
-}
-
-// Fungsi untuk mengambil data mahasiswa
-function ambil_mahasiswa() {
-    global $conn;
-
-    $sql = "SELECT * FROM mahasiswa";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // Mengeluarkan data mahasiswa dalam format tabel
-        echo "<table><tr><th>ID</th><th>Nama</th><th>NIM</th><th>Jurusan</th><th>Kuliah</th><th>Tahun Masuk</th><th>Tahun Lulus</th><th>Tanggal</th></tr>";
-        // Mengulangi seluruh baris dan mengeluarkan selnya
-        while($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["id"]. "</td><td>" . $row["nama"]. "</td><td>" . $row["nim"]. "</td><td>" . $row["jurusan"]. "</td><td>" . $row["kuliah"]. "</td><td>" . $row["tahunMasuk"]. "</td><td>" . $row["tahunLulus"]. "</td><td>" . $row["tanggal"]. "</td></tr>";
-        }
-        echo "</table>";
-    } else {
-        echo "0 results";
-    }
-}
-
-// Fungsi untuk mengupdate data mahasiswa
-function update_mahasiswa($id, $nama, $nim, $jurusan, $kuliah, $tahunMasuk, $tahunLulus) {
-    global $conn;
-
-    $sql = "UPDATE mahasiswa SET nama='$nama', nim='$nim', jurusan='$jurusan', kuliah='$kuliah', tahunMasuk='$tahunMasuk', tahunLulus='$tahunLulus' WHERE id=$id";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Data mahasiswa berhasil diupdate";
-    } else {
-        echo "Gagal mengupdate data: " . $conn->error;
-    }
-}
-
-// Fungsi untuk menghapus data mahasiswa
-function hapus_mahasiswa($id) {
-    global $conn;
-
-    $sql = "DELETE FROM mahasiswa WHERE id=$id";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Data mahasiswa berhasil dihapus";
-    } else {
-        echo "Gagal menghapus data: " . $conn->error;
-    }
-}
-Menjalankan Query dan Menggunakan Fungsi:
-php
-Download
-Copy code
-require 'db_config.php';
-
-// Tambah data mahasiswa
-tambah_mahasiswa('Nama Mahasiswa', '1234567890', 'Jurusan', 'Kuliah', 2018, 2022);
-
-// Ambil data mahasiswa
-ambil_mahasiswa();
-
-// Update data mahasiswa
-update_mahasiswa(1, 'Nama Mahasiswa Update', '1234567890', 'Jurusan Update', 'Kuliah Update', 2017, 2021);
-
-// Hapus data mahasiswa
-hapus_mahasiswa(1);
-
-$conn->close();
-Pastikan file db_config.php berada dalam folder yang sama dengan file PHP ini. Selain itu, periksa kembali nama database, tabel, dan koneksi. Jika masih mengalami kendala, periksa error message yang dihasilkan oleh MySQL dan periksa dokumentasi MySQL untuk penjelasan lebih lanjut..</s>
+**Bagian 4: State Management**
+4.1 Buatlah skrip PHP yang menggunakan session untuk menyimpan dan mengelola state pengguna. Implementasikan logika yang memanfaatkan session.
+4.2 Implementasikan pengelolaan state menggunakan cookie dan browser storage pada sisi client menggunakan JavaScript.
 
 
 
-
-apa data sql nya?
-
-
-Jika anda menginginkan perbedaan antara tabel dan data SQL, maka tabel adalah struktur data yang telah didefinisikan, biasanya dengan kolom-kolom yang berisi informasi berbeda tentang baris data. Data SQL, begitu pula, adalah fakta yang secara tepat atau tidak dikategorikan menjadi baris-baris data yang ada di dalam tabel.
-
-Dalam penggunaan, tabel dapat dipertimbangkan sebagai tempat untuk menyimpan data, dan data SQL itu sendiri adalah fakta yang ada di dalam tabel. Misalnya, dalam tabel pegawai, kita memiliki beberapa baris data, setiap baris berisi informasi tentang satu pegawai.
-
-Misalkan kita memiliki tabel berikut:
-
-Download
-Copy code
-CREATE TABLE pegawai (
- id INT PRIMARY KEY,
- nama VARCHAR(50),
- alamat VARCHAR(100),
- email VARCHAR(50)
-);
-Dalam tabel ini, kita memiliki kolom id, nama, alamat, dan email. Dalam sasaran, data SQL yang kita pertimbangkan adalah informasi yang diberikan oleh pengguna dan disimpan di dalam tabel. Contoh data SQL dalam tabel ini adalah:
-
-Download
-Copy code
-INSERT INTO pegawai (id, nama, alamat, email)
-VALUES (1, 'John Doe', '123 Easy Street', 'john.doe@example.com');
-Dalam contoh ini, kita menambahkan data baru (john.doe@example.com) ke dalam tabel pegawai. Ini adalah contoh data SQL yang ada di dalam tabel.
-
-Mari kita selesaikan dengan bahwa perbedaan antara tabel dan data SQL adalah:
-
-Tabel: merupakan struktur data yang telah didefinisikan, biasanya dengan kolom-kolom yang berisi informasi berbeda tentang baris data.
-Data SQL: merupakan fakta yang ada di dalam tabel, dan dapat dipertimbangkan sebagai data yang telah diinput atau diinputkan ke dalam tabel.
